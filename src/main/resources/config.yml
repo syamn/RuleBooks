@@ -1,0 +1,22 @@
+# RuleBooks Configuration file!
+# @author syamn <admin@sakura-server.net>
+# github: https://github.com/syamn/RuleBooks
+
+#====================#
+#   General Config   #
+#====================#
+# Hook to Vault for economy integration
+UseVault: false
+
+# Names of rulebook that give to players on first join
+FirstJoin:
+  GiveRulebooks: false
+  BookNames:
+    - "ServerRule"
+    - "Your book name here"
+
+#==================#
+#   DO NOT TOUCH   #
+#==================#
+# Do not touch this option! It is a check if you are running the recent configuration version
+Version: 1
