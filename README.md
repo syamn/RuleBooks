@@ -1,0 +1,4 @@
+RuleBooks
+=========
+
+CraftBukkit Plugin: RuleBooks
