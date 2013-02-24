@@ -40,15 +40,22 @@ public class CostCommand extends BaseCommand {
         }
 
         // check price
-        if (!StrUtil.isDouble(args.get(1))) {
-            throw new CommandException(_("InvalidPrice", I18n.COST, args.get(1)));
+        double cost = 0;
+        if (!"free".equalsIgnoreCase(args.get(1))){
+            cost = 0;
+        }else{
+            if (StrUtil.isDouble(args.get(1))){
+                cost = Double.parseDouble(args.get(1));
+            }else{
+                throw new CommandException(_("InvalidPrice", I18n.COST, args.get(1)));
+            }
         }
-        final double cost = Double.parseDouble(args.get(1));
+        
         if (cost < 0) {
             throw new CommandException(_("InvalidPrice", I18n.COST, cost));
         }
 
         RuleBookManager.getBook(name).setCost(cost);
-        Util.message(sender, _("SetPrice", I18n.BOOK_NAME, name, I18n.COST, EconomyUtil.getCurrencyString(cost)));
+        Util.message(sender, _("SetPrice", I18n.BOOK_NAME, name, I18n.COST, (cost > 0) ? EconomyUtil.getCurrencyString(cost) : "FREE"));
     }
 }

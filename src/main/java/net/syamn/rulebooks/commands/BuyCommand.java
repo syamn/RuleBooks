@@ -95,7 +95,7 @@ public class BuyCommand extends BaseCommand {
         for (final RuleBook book : books.values()) {
             line = "&6 " + book.getName();
             if (econEnabled) {
-                line += "&7 (" + _("Price") + ": " + EconomyUtil.getCurrencyString(book.getCost()) + ")";
+                line += "&7 (" + _("Price") + ": " + ((book.getCost() > 0) ? EconomyUtil.getCurrencyString(book.getCost()) : "FREE") + ")";
             }
             Util.message(p, line);
         }
