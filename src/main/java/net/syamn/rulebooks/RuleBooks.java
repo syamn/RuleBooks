@@ -66,7 +66,9 @@ public class RuleBooks extends JavaPlugin {
         }
 
         // check really enabled?
-        if (!pm.isPluginEnabled(this)) { return; }
+        if (!pm.isPluginEnabled(this)) {
+            return;
+        }
 
         // load language
         LogUtil.info("Loading language file: " + config.getLanguage());
@@ -154,9 +156,9 @@ public class RuleBooks extends JavaPlugin {
             }
 
             if (args.length == 0) {
-                if (sender instanceof Player){
+                if (sender instanceof Player) {
                     BuyCommand.sendBuyables((Player) sender);
-                }else{
+                } else {
                     new HelpCommand().run(this, sender, args, commandLabel);
                 }
             } else {

@@ -59,8 +59,7 @@ public class RuleBookManager {
         books.clear();
 
         // ファイルなし
-        if (files == null || files.length == 0)
-            return;
+        if (files == null || files.length == 0) return;
 
         for (final File file : files) {
             try {
@@ -78,20 +77,18 @@ public class RuleBookManager {
         }
         return dir;
     }
-    
-    public static boolean isValidName(final String bookName){
-        if (bookName == null || bookName.contains(" ") || bookName.contains("*") ||
-                bookName.contains(File.separator) || bookName.contains(File.pathSeparator) ||
-                bookName.contains("<") || bookName.contains(">")){
+
+    public static boolean isValidName(final String bookName) {
+        if (bookName == null || bookName.contains(" ") || bookName.contains("*") || bookName.contains(File.separator) || bookName.contains(File.pathSeparator) || bookName.contains("<") || bookName.contains(">")) {
             return false;
         }
-        
-        for (final BaseCommand cmd : RuleBooks.getInstance().commands){
-            if (bookName.equalsIgnoreCase(cmd.name)){
+
+        for (final BaseCommand cmd : RuleBooks.getInstance().commands) {
+            if (bookName.equalsIgnoreCase(cmd.name)) {
                 return false;
             }
         }
-        
+
         return true;
     }
 }

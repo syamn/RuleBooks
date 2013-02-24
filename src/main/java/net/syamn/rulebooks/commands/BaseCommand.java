@@ -4,6 +4,8 @@
  */
 package net.syamn.rulebooks.commands;
 
+import static net.syamn.rulebooks.I18n._;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,6 @@ import net.syamn.utils.exception.CommandException;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import static net.syamn.rulebooks.I18n._;
 
 /**
  * BaseCommand (BaseCommand.java)
@@ -111,7 +112,9 @@ public abstract class BaseCommand {
     }
 
     final public boolean canExecute(CommandSender sender) {
-        if ((perm != null && !perm.has(sender)) || !permission(sender)) { return false; }
+        if ((perm != null && !perm.has(sender)) || !permission(sender)) {
+            return false;
+        }
         return true;
     }
 

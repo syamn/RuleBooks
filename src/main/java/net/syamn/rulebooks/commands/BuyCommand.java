@@ -43,8 +43,8 @@ public class BuyCommand extends BaseCommand {
     public void execute() throws CommandException {
         final String bookName = args.get(0).trim();
         final Map<String, RuleBook> books = getBuyableBooks(sender);
-        
-        if (!books.containsKey(bookName.toLowerCase(Locale.ENGLISH))){
+
+        if (!books.containsKey(bookName.toLowerCase(Locale.ENGLISH))) {
             throw new CommandException(_("BookNotFound", I18n.BOOK_NAME, bookName));
         }
         final RuleBook book = books.get(bookName.toLowerCase(Locale.ENGLISH));
@@ -59,14 +59,18 @@ public class BuyCommand extends BaseCommand {
                 break;
             }
         }
-        if (!hasEmptySlot) { throw new CommandException(_("NotEnoughSlot")); }
+        if (!hasEmptySlot) {
+            throw new CommandException(_("NotEnoughSlot"));
+        }
 
         // pay cost
         double cost = book.getCost();
         boolean paid = false;
         if (cost > 0 && plugin.getConfigs().isEnabledEcon()) {
             paid = EconomyUtil.takeMoney(player, cost);
-            if (!paid) { throw new CommandException(_("NotEnoughMoney", I18n.COST, cost)); }
+            if (!paid) {
+                throw new CommandException(_("NotEnoughMoney", I18n.COST, cost));
+            }
         }
 
         inv.addItem(book.getItem());
@@ -76,42 +80,42 @@ public class BuyCommand extends BaseCommand {
             Util.message(sender, _("GotBook", I18n.BOOK_NAME, book.getName()));
         }
     }
-    
-    public static void sendBuyables(final Player p){
+
+    public static void sendBuyables(final Player p) {
         Map<String, RuleBook> books = getBuyableBooks(p);
-        if (books.isEmpty()){
+        if (books.isEmpty()) {
             Util.message(p, _("NoAvailableBooks"));
             return;
         }
-        
+
         final boolean econEnabled = RuleBooks.getInstance().getConfigs().isEnabledEcon();
         Util.message(p, _("AvailableListHeader", I18n.COUNT, books.size()));
-        
+
         String line;
-        for (final RuleBook book : books.values()){
+        for (final RuleBook book : books.values()) {
             line = "&6 " + book.getName();
-            if (econEnabled){
+            if (econEnabled) {
                 line += "&7 (" + _("Price") + ": " + EconomyUtil.getCurrencyString(book.getCost()) + ")";
             }
             Util.message(p, line);
         }
     }
-    
-    private static boolean isBuyableBook(final RuleBook book, final Permissible perm){
+
+    private static boolean isBuyableBook(final RuleBook book, final Permissible perm) {
         if (book == null || perm == null) return false;
         return (Perms.BUY_HEADER.has(perm, book.getName().toLowerCase(Locale.ENGLISH)));
     }
-    
-    private static Map<String, RuleBook> getBuyableBooks(final Permissible perm){
+
+    private static Map<String, RuleBook> getBuyableBooks(final Permissible perm) {
         Map<String, RuleBook> ret = new HashMap<String, RuleBook>();
         ret.clear();
-        
-        for (final Map.Entry<String, RuleBook> entry : RuleBookManager.getBooks().entrySet()){
-            if (isBuyableBook(entry.getValue(), perm)){
+
+        for (final Map.Entry<String, RuleBook> entry : RuleBookManager.getBooks().entrySet()) {
+            if (isBuyableBook(entry.getValue(), perm)) {
                 ret.put(entry.getKey(), entry.getValue());
             }
         }
-        
+
         return ret;
     }
 }

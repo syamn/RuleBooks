@@ -4,12 +4,12 @@
  */
 package net.syamn.rulebooks.commands;
 
+import static net.syamn.rulebooks.I18n._;
 import net.syamn.rulebooks.I18n;
 import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.manager.RuleBookManager;
 import net.syamn.utils.LogUtil;
 import net.syamn.utils.Util;
-import static net.syamn.rulebooks.I18n._;
 
 /**
  * ReloadCommand (ReloadCommand.java)

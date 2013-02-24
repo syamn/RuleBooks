@@ -4,6 +4,7 @@
  */
 package net.syamn.rulebooks.commands;
 
+import static net.syamn.rulebooks.I18n._;
 import net.syamn.rulebooks.I18n;
 import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.manager.RuleBookManager;
@@ -11,7 +12,6 @@ import net.syamn.utils.StrUtil;
 import net.syamn.utils.Util;
 import net.syamn.utils.economy.EconomyUtil;
 import net.syamn.utils.exception.CommandException;
-import static net.syamn.rulebooks.I18n._;
 
 /**
  * CostCommand (CostCommand.java)
@@ -29,16 +29,24 @@ public class CostCommand extends BaseCommand {
 
     @Override
     public void execute() throws CommandException {
-        if (!plugin.getConfigs().isEnabledEcon()) { throw new CommandException(_("VaultDisabled")); }
+        if (!plugin.getConfigs().isEnabledEcon()) {
+            throw new CommandException(_("VaultDisabled"));
+        }
 
         // check book
         final String name = args.get(0).trim();
-        if (!RuleBookManager.isExist(name)) { throw new CommandException(_("BookNotFound", name)); }
+        if (!RuleBookManager.isExist(name)) {
+            throw new CommandException(_("BookNotFound", name));
+        }
 
         // check price
-        if (!StrUtil.isDouble(args.get(1))) { throw new CommandException(_("InvalidPrice", I18n.COST, args.get(1))); }
+        if (!StrUtil.isDouble(args.get(1))) {
+            throw new CommandException(_("InvalidPrice", I18n.COST, args.get(1)));
+        }
         final double cost = Double.parseDouble(args.get(1));
-        if (cost < 0) { throw new CommandException(_("InvalidPrice", I18n.COST, cost)); }
+        if (cost < 0) {
+            throw new CommandException(_("InvalidPrice", I18n.COST, cost));
+        }
 
         RuleBookManager.getBook(name).setCost(cost);
         Util.message(sender, _("SetPrice", I18n.BOOK_NAME, name, I18n.COST, EconomyUtil.getCurrencyString(cost)));

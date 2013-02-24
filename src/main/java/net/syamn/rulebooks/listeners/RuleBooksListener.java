@@ -4,6 +4,8 @@
  */
 package net.syamn.rulebooks.listeners;
 
+import static net.syamn.rulebooks.I18n._;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +24,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
-import static net.syamn.rulebooks.I18n._;
 
 /**
  * RuleBooksListener (RuleBooksListener.java)
@@ -38,14 +39,18 @@ public class RuleBooksListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(final PlayerJoinEvent event) {
-        if (!plugin.getConfigs().giveBooksOnFirstJoin()) { return; }
+        if (!plugin.getConfigs().giveBooksOnFirstJoin()) {
+            return;
+        }
 
         final Player player = event.getPlayer();
         final String pname = player.getName();
         // First join
         if (!player.hasPlayedBefore()) {
             final List<String> bookNames = plugin.getConfigs().getBookNames();
-            if (bookNames == null || bookNames.isEmpty()) { return; }
+            if (bookNames == null || bookNames.isEmpty()) {
+                return;
+            }
 
             final List<RuleBook> books = new ArrayList<RuleBook>();
             for (String name : bookNames) {
@@ -55,7 +60,9 @@ public class RuleBooksListener implements Listener {
                 }
                 books.add(RuleBookManager.getBook(name));
             }
-            if (books.isEmpty()) { return; }
+            if (books.isEmpty()) {
+                return;
+            }
 
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
@@ -91,7 +98,9 @@ public class RuleBooksListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPluginDisable(final PluginDisableEvent event) {
-        if (!plugin.getConfigs().isEnabledEcon()) { return; }
+        if (!plugin.getConfigs().isEnabledEcon()) {
+            return;
+        }
 
         if (event.getPlugin().getName().equals("Vault")) {
             LogUtil.warning("Detected unloading Vault plugin. Disabled Vault integration.");

@@ -118,8 +118,7 @@ public class I18n {
 
         // missing key
         if (msg == null || msg.length() == 0) {
-            if (msg == null)
-                LogUtil.warning("Missing message key '" + key + "'");
+            if (msg == null) LogUtil.warning("Missing message key '" + key + "'");
             msg = getString(fallbackMessages, key);
             if (msg == null || msg.length() == 0) {
                 LogUtil.warning("Delete language files and type '/rulebooks reload' to regenerate them.");
@@ -133,8 +132,7 @@ public class I18n {
         // build replaces
         Map<String, Object> binds = buildBinds(args);
         for (String bindKey : binds.keySet()) {
-            if (bindKey == null)
-                continue;
+            if (bindKey == null) continue;
             final Object obj = binds.get(bindKey);
             msg = msg.replace(bindKey, ((obj != null) ? obj.toString() : ""));
         }
@@ -145,7 +143,9 @@ public class I18n {
     private static Map<String, Object> buildBinds(final Object... args) {
         Map<String, Object> bind = new HashMap<String, Object>(args.length / 2);
 
-        if (args == null || args.length < 2) { return bind; }
+        if (args == null || args.length < 2) {
+            return bind;
+        }
 
         for (int i = 0; i < args.length; i += 2) {
             if ((i + 2) > args.length) {

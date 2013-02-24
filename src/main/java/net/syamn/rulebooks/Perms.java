@@ -16,7 +16,7 @@ import org.bukkit.permissions.Permissible;
  */
 public enum Perms {
     /* 権限ノード */
-    BUY_HEADER ("buy"), NEW("admin.new"), DELETE("admin.delete"), COST("admin.cost"), LIST("admin.list"), RELOAD("admin.reload"), ;
+    BUY_HEADER("buy"), NEW("admin.new"), DELETE("admin.delete"), COST("admin.cost"), LIST("admin.list"), RELOAD("admin.reload"), ;
 
     // ノードヘッダー
     final String HEADER = "rulebooks.";
@@ -40,7 +40,9 @@ public enum Perms {
      * @return boolean
      */
     public boolean has(final Permissible perm) {
-        if (perm == null) { return false; }
+        if (perm == null) {
+            return false;
+        }
         return perm.hasPermission(getNode());
     }
 
@@ -54,7 +56,9 @@ public enum Perms {
      * @return boolean
      */
     public boolean has(final Permissible perm, final String subPerm) {
-        if (perm == null) { return false; }
+        if (perm == null) {
+            return false;
+        }
         return perm.hasPermission(getNode().concat("." + subPerm));
     }
 
