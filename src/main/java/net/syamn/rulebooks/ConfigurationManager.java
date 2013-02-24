@@ -23,21 +23,23 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 public class ConfigurationManager {
     /* Current config.yml file version */
     private final int latestVersion = 1;
-    
+
     private RuleBooks plugin;
-    
+
     private FileConfiguration conf;
     private File pluginDir;
-    
+
     // ** Hookup Plugins **
     private boolean isEnabledEcon = false;
-    public boolean isEnabledEcon(){
+
+    public boolean isEnabledEcon() {
         return this.isEnabledEcon();
     }
-    public void disableEcon(){
+
+    public void disableEcon() {
         this.isEnabledEcon = false;
     }
-    
+
     /**
      * コンストラクタ
      * 
@@ -58,7 +60,7 @@ public class ConfigurationManager {
         FileStructure.createDir(pluginDir);
 
         File file = new File(pluginDir, "config.yml");
-        if (!file.exists()){
+        if (!file.exists()) {
             FileStructure.extractResource("/config.yml", pluginDir, false, false, plugin);
             LogUtil.info("config.yml is not found! Created default config.yml!");
         }
@@ -69,26 +71,27 @@ public class ConfigurationManager {
         checkver(conf.getInt("ConfigVersion", 1));
 
         // setup Vault economy
-        if (getUseVault()){
+        if (getUseVault()) {
             RegisteredServiceProvider<Economy> econProv = plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
             if (econProv != null) {
                 SakuraLib.setEconomy(econProv.getProvider());
                 this.isEnabledEcon = true;
                 LogUtil.info("Enabled economy hookup! Using Vault (" + EconomyUtil.getEconomyName() + ") for economy plugin!");
-            }else{
+            } else {
                 this.isEnabledEcon = false;
                 LogUtil.warning("Could not hook to economy plugin!");
             }
-        }else{
+        } else {
             this.isEnabledEcon = false;
         }
     }
-    
+
     /**
      * Check configuration file version
+     * 
      * @param ver
      */
-    private void checkver(final int ver){
+    private void checkver(final int ver) {
         // compare configuration file version
         if (ver < latestVersion) {
             // first, rename old configuration
@@ -112,17 +115,22 @@ public class ConfigurationManager {
             LogUtil.info("Deleted existing configuration file and generate a new one!");
         }
     }
-    
+
     /* ***** Begin Configuration Getters ******************** */
     // General
-    private boolean getUseVault(){
+    public String getLanguage() {
+        return conf.getString("Language", "default");
+    }
+
+    private boolean getUseVault() {
         return conf.getBoolean("UseVault", false);
     }
-    
-    public boolean giveBooksOnFirstJoin(){
+
+    public boolean giveBooksOnFirstJoin() {
         return conf.getBoolean("FirstJoin.GiveRulebooks", false);
     }
-    public List<String> getBookNames(){
+
+    public List<String> getBookNames() {
         return conf.getStringList("FirstJoin.BookNames");
     }
 }

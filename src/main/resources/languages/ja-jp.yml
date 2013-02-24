@@ -1,0 +1,21 @@
+# Japanese RuleBooks File
+
+PermissionDenied: "&c権限がありません"
+VaultDisabled: "&c経済連携は設定ファイルで無効になっています"
+BookNotFound: "&cルールブック '%BOOK_NAME%' は存在しません"
+NoBooks: "&c本がありません！'/rulebooks new <name>'で追加できます！"
+AlreadyExist: "&c同じ名前の本が既に登録されています！"
+NotEnoughSlot: "&cインベントリに十分な空きがありません！"
+NotEnoughMoney: "&cお金が足りません！ (%COST%)"
+InvalidPrice: "&c不正な価格です: %COST%"
+NotWrittenBook: "&c署名済みの本を手に持つ必要があります！"
+
+BoughtBook: "&aルールブック'%BOOK_NAME%'を %COST% で買いました！"
+GotBook: "&aルールブック'%BOOK_NAME%'を受け取りました！"
+FirstJoin: "&a%COUNT%つのルールブックを受け取りました！"
+
+NewBook: "&aルールブック'%BOOK_NAME%'を保存しました！"
+DeleteBook: "&aルールブック'%BOOK_NAME%'を削除しました！"
+
+SetPrice: "&aルールブック'%BOOK_NAME%'の値段を設定しました: %COST%"
+Reloaded: "&a設定ファイルを再読み込みしました"

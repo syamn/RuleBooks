@@ -14,6 +14,7 @@ import net.syamn.utils.exception.CommandException;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import static net.syamn.rulebooks.I18n._;
 
 /**
  * BaseCommand (BaseCommand.java)
@@ -22,7 +23,7 @@ import org.bukkit.entity.Player;
  */
 public abstract class BaseCommand {
     protected RuleBooks plugin;
-    
+
     /* コマンド関係 */
     protected String command;
     protected CommandSender sender;
@@ -30,7 +31,7 @@ public abstract class BaseCommand {
     protected boolean isPlayer;
     protected List<String> args = new ArrayList<String>();
     protected int argLength = 0;
-    
+
     public String name;
     protected boolean bePlayer = true;
     protected String usage;
@@ -43,12 +44,12 @@ public abstract class BaseCommand {
 
         // 引数をソート
         args.clear();
-        for (String arg : preArgs){
+        for (String arg : preArgs) {
             args.add(arg);
         }
 
-        if (name != null){
-            for (int i = 0; i < name.split(" ").length && i < args.size(); i++){
+        if (name != null) {
+            for (int i = 0; i < name.split(" ").length && i < args.size(); i++) {
                 args.remove(0);
             }
         }
@@ -62,11 +63,11 @@ public abstract class BaseCommand {
         if (sender instanceof Player) {
             player = (Player) sender;
             isPlayer = true;
-        }else{
+        } else {
             player = null;
             isPlayer = false;
         }
-        
+
         // 実行にプレイヤーであることが必要かチェックする
         if (bePlayer && !isPlayer) {
             Util.message(sender, "&cThis command cannot run from Console!");
@@ -75,16 +76,16 @@ public abstract class BaseCommand {
 
         // 権限チェック
         if (!canExecute(sender)) {
-            Util.message(sender, "&cYou don't have permission to use this!");
+            Util.message(sender, _("PermissionDenied"));
             return true;
         }
-        
+
         // 実行
         try {
             execute();
         } catch (CommandException ex) {
             Throwable error = ex;
-            while (error instanceof Exception){
+            while (error instanceof Exception) {
                 Util.message(sender, error.getMessage());
                 error = error.getCause();
             }
@@ -105,14 +106,12 @@ public abstract class BaseCommand {
      * 
      * @return trueなら権限あり、falseなら権限なし
      */
-    public boolean permission(CommandSender sender){
+    public boolean permission(CommandSender sender) {
         return true;
     }
-    
-    final public boolean canExecute(CommandSender sender){
-        if ((perm != null && !perm.has(sender)) || !permission(sender)){
-            return false;
-        }
+
+    final public boolean canExecute(CommandSender sender) {
+        if ((perm != null && !perm.has(sender)) || !permission(sender)) { return false; }
         return true;
     }
 

@@ -41,8 +41,6 @@ public class RuleBooks extends JavaPlugin {
     // ** Instance **
     private static RuleBooks instance;
 
-    
-
     /**
      * プラグイン起動処理
      */
@@ -63,15 +61,17 @@ public class RuleBooks extends JavaPlugin {
         }
 
         // check really enabled?
-        if (!pm.isPluginEnabled(this)) {
-            return;
-        }
+        if (!pm.isPluginEnabled(this)) { return; }
+
+        // load language
+        LogUtil.info("Loading language file: " + config.getLanguage());
+        I18n.init(config.getLanguage());
 
         // Regist Listeners
         pm.registerEvents(serverListener, this);
 
         registerCommands();
-        
+
         // load Books
         RuleBookManager.loadBooks();
 
@@ -88,10 +88,10 @@ public class RuleBooks extends JavaPlugin {
     @Override
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
-        
+
         // save
         RuleBookManager.dispose();
-        
+
         // messages
         PluginDescriptionFile pdfFile = this.getDescription();
         LogUtil.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " is disabled!");
@@ -129,9 +129,9 @@ public class RuleBooks extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]) {
         if (cmd.getName().equalsIgnoreCase("rulebooks")) {
-            //if (args.length == 0) {
-            //    args = new String[] { "help" };
-            //}
+            // if (args.length == 0) {
+            // args = new String[] { "help" };
+            // }
 
             outer: for (BaseCommand command : commands.toArray(new BaseCommand[0])) {
                 String[] cmds = command.name.split(" ");
@@ -143,11 +143,10 @@ public class RuleBooks extends JavaPlugin {
                     return command.run(this, sender, args, commandLabel);
                 }
             }
-            
-            if (args.length == 0){
+
+            if (args.length == 0) {
                 new HelpCommand().run(this, sender, args, commandLabel);
-            }
-            else{
+            } else {
                 new BuyCommand().run(this, sender, args, commandLabel);
             }
             return true;

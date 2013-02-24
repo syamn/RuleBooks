@@ -1,6 +1,5 @@
 /**
- * RuleBooks - Package: net.syamn.rulebooks.manager
- * Created: 2013/02/23 11:52:54
+ * RuleBooks - Package: net.syamn.rulebooks.manager Created: 2013/02/23 11:52:54
  */
 package net.syamn.rulebooks.manager;
 
@@ -14,40 +13,44 @@ import net.syamn.rulebooks.RuleBooks;
 
 /**
  * RuleBookManager (RuleBookManager.java)
+ * 
  * @author syam(syamn)
  */
 public class RuleBookManager {
     final private static String dirName = "books";
     private static Map<String, RuleBook> books = new HashMap<String, RuleBook>();
-    
-    public static void dispose(){
+
+    public static void dispose() {
         saveBooks();
         books.clear();
     }
-    
-    public static boolean isExist(final String name){
+
+    public static boolean isExist(final String name) {
         return books.containsKey(name.toLowerCase(Locale.ENGLISH).trim());
     }
-    
-    public static RuleBook getBook(final String name){
+
+    public static RuleBook getBook(final String name) {
         return books.get(name.toLowerCase(Locale.ENGLISH).trim());
     }
-    public static void putBook(final RuleBook book){
+
+    public static void putBook(final RuleBook book) {
         books.put(book.getName().toLowerCase(Locale.ENGLISH).trim(), book);
     }
-    public static void removeBook(final RuleBook book){
+
+    public static void removeBook(final RuleBook book) {
         books.remove(book.getName().toLowerCase(Locale.ENGLISH).trim());
     }
-    
-    public static Map<String, RuleBook> getBooks(){
+
+    public static Map<String, RuleBook> getBooks() {
         return Collections.unmodifiableMap(books);
     }
-    
-    public static void saveBooks(){
-        for (final RuleBook book : books.values()){
+
+    public static void saveBooks() {
+        for (final RuleBook book : books.values()) {
             book.save();
         }
     }
+
     public static void loadBooks() {
         File dir = getDataDirectory();
         File[] files = dir.listFiles();
@@ -55,20 +58,21 @@ public class RuleBookManager {
         books.clear();
 
         // ファイルなし
-        if (files == null || files.length == 0) return;
+        if (files == null || files.length == 0)
+            return;
 
         for (final File file : files) {
             try {
                 putBook(new RuleBook(file));
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 continue;
             }
         }
     }
-    
-    public static File getDataDirectory(){
+
+    public static File getDataDirectory() {
         final File dir = new File(RuleBooks.getInstance().getDataFolder(), dirName);
-        if (!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         return dir;
