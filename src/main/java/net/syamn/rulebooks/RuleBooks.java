@@ -9,7 +9,11 @@ import java.util.List;
 
 import net.syamn.rulebooks.commands.BaseCommand;
 import net.syamn.rulebooks.commands.BuyCommand;
+import net.syamn.rulebooks.commands.CostCommand;
+import net.syamn.rulebooks.commands.DeleteCommand;
 import net.syamn.rulebooks.commands.HelpCommand;
+import net.syamn.rulebooks.commands.ListCommand;
+import net.syamn.rulebooks.commands.NewCommand;
 import net.syamn.rulebooks.commands.ReloadCommand;
 import net.syamn.rulebooks.listeners.RuleBooksListener;
 import net.syamn.rulebooks.manager.RuleBookManager;
@@ -106,6 +110,10 @@ public class RuleBooks extends JavaPlugin {
         commands.add(new HelpCommand());
 
         // General Commands
+        commands.add(new NewCommand());
+        commands.add(new DeleteCommand());
+        commands.add(new CostCommand());
+        commands.add(new ListCommand());
 
         // Admin Commands
         commands.add(new ReloadCommand());
