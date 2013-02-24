@@ -9,6 +9,7 @@ AlreadyExist: "&c同じ名前の本が既に登録されています！"
 NotEnoughSlot: "&cインベントリに十分な空きがありません！"
 NotEnoughMoney: "&cお金が足りません！ (%COST%)"
 InvalidPrice: "&c不正な価格です: %COST%"
+InvalidBookName: "&c不正な名前です: %BOOK_NAME%"
 NotWrittenBook: "&c署名済みの本を手に持つ必要があります！"
 Price: "価格"
 

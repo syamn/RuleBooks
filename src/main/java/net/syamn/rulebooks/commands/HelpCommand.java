@@ -24,7 +24,7 @@ public class HelpCommand extends BaseCommand {
     @Override
     public void execute() {
         Util.message(sender, "&c===================================");
-        Util.message(sender, "&bRuleBooks Plugin version &3%version &bby syamn");
+        Util.message(sender, "&bRuleBooks Plugin version &3" + plugin.getDescription().getVersion() + " &bby syamn");
         Util.message(sender, " &b<>&f = required, &b[]&f = optional");
         // 全コマンドをループで表示
         for (BaseCommand cmd : RuleBooks.commands.toArray(new BaseCommand[0])) {

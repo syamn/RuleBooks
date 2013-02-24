@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.syamn.rulebooks.RuleBooks;
+import net.syamn.rulebooks.commands.BaseCommand;
 
 /**
  * RuleBookManager (RuleBookManager.java)
@@ -76,5 +77,21 @@ public class RuleBookManager {
             dir.mkdirs();
         }
         return dir;
+    }
+    
+    public static boolean isValidName(final String bookName){
+        if (bookName == null || bookName.contains(" ") || bookName.contains("*") ||
+                bookName.contains(File.separator) || bookName.contains(File.pathSeparator) ||
+                bookName.contains("<") || bookName.contains(">")){
+            return false;
+        }
+        
+        for (final BaseCommand cmd : RuleBooks.getInstance().commands){
+            if (bookName.equalsIgnoreCase(cmd.name)){
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

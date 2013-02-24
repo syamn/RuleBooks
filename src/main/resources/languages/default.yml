@@ -9,6 +9,7 @@ AlreadyExist: "&cSame name book already exists!"
 NotEnoughSlot: "&cNot enough empty slots in your inventory!"
 NotEnoughMoney: "&cYou don't have enough money! (%COST%)"
 InvalidPrice: "&cInvalid price: %COST%"
+InvalidBookName: "&cInvalid book name: %BOOK_NAME%"
 NotWrittenBook: "&cYou must hold a written book!"
 Price: "Price"
 

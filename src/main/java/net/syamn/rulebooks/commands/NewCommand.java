@@ -33,6 +33,10 @@ public class NewCommand extends BaseCommand {
     @Override
     public void execute() throws CommandException {
         final String name = args.get(0).trim();
+        
+        if (!RuleBookManager.isValidName(name)){
+            throw new CommandException(_("InvalidBookName", I18n.BOOK_NAME, name));
+        }
 
         if (RuleBookManager.isExist(name)) { throw new CommandException(_("AlreadyExist")); }
 
