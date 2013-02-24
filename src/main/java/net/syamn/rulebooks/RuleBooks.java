@@ -18,6 +18,7 @@ import net.syamn.utils.Metrics;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -145,7 +146,11 @@ public class RuleBooks extends JavaPlugin {
             }
 
             if (args.length == 0) {
-                new HelpCommand().run(this, sender, args, commandLabel);
+                if (sender instanceof Player){
+                    BuyCommand.sendBuyables((Player) sender);
+                }else{
+                    new HelpCommand().run(this, sender, args, commandLabel);
+                }
             } else {
                 new BuyCommand().run(this, sender, args, commandLabel);
             }

@@ -4,19 +4,25 @@
  */
 package net.syamn.rulebooks.commands;
 
+import static net.syamn.rulebooks.I18n._;
+
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
 
 import net.syamn.rulebooks.I18n;
+import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.manager.RuleBook;
 import net.syamn.rulebooks.manager.RuleBookManager;
-import net.syamn.utils.StrUtil;
 import net.syamn.utils.Util;
 import net.syamn.utils.economy.EconomyUtil;
 import net.syamn.utils.exception.CommandException;
 
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import static net.syamn.rulebooks.I18n._;
+import org.bukkit.permissions.Permissible;
 
 /**
  * BuyCommand (BuyCommand.java)
@@ -34,9 +40,13 @@ public class BuyCommand extends BaseCommand {
 
     @Override
     public void execute() throws CommandException {
-        final String bookName = StrUtil.join(args, " ");
-        if (!RuleBookManager.isExist(bookName)) { throw new CommandException(_("BookNotFound", I18n.BOOK_NAME, bookName)); }
-        final RuleBook book = RuleBookManager.getBook(bookName);
+        final String bookName = args.get(0).trim();
+        final Map<String, RuleBook> books = getBuyableBooks(sender);
+        
+        if (!books.containsKey(bookName.toLowerCase(Locale.ENGLISH))){
+            throw new CommandException(_("BookNotFound", I18n.BOOK_NAME, bookName));
+        }
+        final RuleBook book = books.get(bookName.toLowerCase(Locale.ENGLISH));
 
         // check inventory
         PlayerInventory inv = player.getInventory();
@@ -64,5 +74,36 @@ public class BuyCommand extends BaseCommand {
         } else {
             Util.message(sender, _("GotBook", I18n.BOOK_NAME, book.getName()));
         }
+    }
+    
+    public static void sendBuyables(final Player p){
+        Map<String, RuleBook> books = getBuyableBooks(p);
+        if (books.isEmpty()){
+            Util.message(p, "&c現在購入できるルールブックはありません！");
+            return;
+        }
+        
+        Util.message(p, "&a ===== &b購入可能ルールブックリスト(" + books.size() + ") &a======");
+        for (final RuleBook book : books.values()){
+            Util.message(p, " &6" + book.getName() + "&7 (Cost: " + EconomyUtil.getCurrencyString(book.getCost()) + ")");
+        }
+    }
+    
+    private static boolean isBuyableBook(final RuleBook book, final Permissible perm){
+        if (book == null || perm == null) return false;
+        return (Perms.BUY_HEADER.has(perm, book.getName().toLowerCase(Locale.ENGLISH)));
+    }
+    
+    private static Map<String, RuleBook> getBuyableBooks(final Permissible perm){
+        Map<String, RuleBook> ret = new HashMap<String, RuleBook>();
+        ret.clear();
+        
+        for (final Map.Entry<String, RuleBook> entry : RuleBookManager.getBooks().entrySet()){
+            if (isBuyableBook(entry.getValue(), perm)){
+                ret.put(entry.getKey(), entry.getValue());
+            }
+        }
+        
+        return ret;
     }
 }

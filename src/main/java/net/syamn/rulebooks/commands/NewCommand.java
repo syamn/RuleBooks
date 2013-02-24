@@ -8,6 +8,7 @@ import net.syamn.rulebooks.I18n;
 import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.manager.RuleBook;
 import net.syamn.rulebooks.manager.RuleBookManager;
+import net.syamn.utils.StrUtil;
 import net.syamn.utils.Util;
 import net.syamn.utils.exception.CommandException;
 

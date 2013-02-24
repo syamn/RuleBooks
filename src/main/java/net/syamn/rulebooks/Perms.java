@@ -16,7 +16,7 @@ import org.bukkit.permissions.Permissible;
  */
 public enum Perms {
     /* 権限ノード */
-    NEW("admin.new"), DELETE("admin.delete"), COST("admin.cost"), LIST("admin.list"), RELOAD("admin.reload"), ;
+    BUY_HEADER ("buy"), NEW("admin.new"), DELETE("admin.delete"), COST("admin.cost"), LIST("admin.list"), RELOAD("admin.reload"), ;
 
     // ノードヘッダー
     final String HEADER = "rulebooks.";
