@@ -33,7 +33,7 @@ public class ConfigurationManager {
     private boolean isEnabledEcon = false;
 
     public boolean isEnabledEcon() {
-        return this.isEnabledEcon();
+        return this.isEnabledEcon;
     }
 
     public void disableEcon() {
