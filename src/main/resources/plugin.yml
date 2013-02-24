@@ -2,7 +2,7 @@
 name: RuleBooks
 version: version-number-unknown
 main: net.syamn.rulebooks.RuleBooks
-description: BookEditor Plugin
+description: CraftBukkit RuleBooks Plugin
 website: http://ci.sakura-server.net/
 softdepend: [Vault]
 ##  Original Author     ##
@@ -11,72 +11,38 @@ commands:
     rulebooks:
       usage: /rulebooks - to see the help
       aliases: [rulebook, rb]
-      description: To see the BookEditor help.
+      description: To see the RuleBooks help.
 permissions:
-    bookeditor.*:
+    rulebooks.*:
         default: op
         description: Allow access to all commands
         children:
-            bookeditor.user.*: true
-            bookeditor.free.*: true
-            bookeditor.other.*: true
-            bookeditor.setauthor: true
-            bookeditor.reload: true
-    bookeditor.user.*:
+            rulebooks.buy.*: true
+            rulebooks.admin.*: true
+    rulebooks.admin.*:
         default: op
-        description: Allow access to user commands
+        description: Allow access to admin commands
         children:
-            bookeditor.user.copy: true
-            bookeditor.user.edit: true
-            bookeditor.user.title: true
-            bookeditor.user.title.color: true
-    bookeditor.free.*:
+            rulebooks.admin.new: true
+            rulebooks.admin.delete: true
+            rulebooks.admin.cost: true
+            rulebooks.admin.list: true
+            rulebooks.admin.reload: true
+    rulebooks.buy.*:
         default: op
-        description: Bypass all charges
-        children:
-            bookeditor.free.copy: true
-            bookeditor.free.edit: true
-            bookeditor.free.title: true
-    bookeditor.other.*:
+        description: Allow to buy all rulebooks
+    rulebooks.admin.new:
         default: op
-        description: Allow use commands to other's book
-        children:
-            bookeditor.other.copy: true
-            bookeditor.other.edit: true
-            bookeditor.other.title: true
-    bookeditor.user.copy:
+        description: Allow to use new command
+    rulebooks.admin.delete:
         default: op
-        description: Allow use copy command
-    bookeditor.free.copy:
+        description: Allow to use delete command
+    rulebooks.admin.cost:
         default: op
-        description: Bypass copy command charge
-    bookeditor.other.copy:
+        description: Allow to use cost command
+    rulebooks.admin.list:
         default: op
-        description: Allow copy other's book
-    bookeditor.user.edit:
+        description: Allow to use list command
+    rulebooks.admin.reload:
         default: op
-        description: Allow use edit command
-    bookeditor.free.edit:
-        default: op
-        description: Bypass edit command charge
-    bookeditor.other.edit:
-        default: op
-        description: Allow unsign other's book
-    bookeditor.user.title:
-        default: op
-        description: Allow use title command
-    bookeditor.user.title.color:
-        default: op
-        description: Allow use color tag in title
-    bookeditor.free.title:
-        default: op
-        description: Bypass title command charge
-    bookeditor.other.title:
-        default: op
-        description: Allow edit title other's book
-    bookeditor.setauthor:
-        default: op
-        description: Allow set author the book
-    bookeditor.reload:
-        default: op
-        description: Allow reload configuration
+        description: Allow to use reload command
