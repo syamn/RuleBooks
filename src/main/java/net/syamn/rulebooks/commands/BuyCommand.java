@@ -13,6 +13,7 @@ import java.util.Map;
 
 import net.syamn.rulebooks.I18n;
 import net.syamn.rulebooks.Perms;
+import net.syamn.rulebooks.RuleBooks;
 import net.syamn.rulebooks.manager.RuleBook;
 import net.syamn.rulebooks.manager.RuleBookManager;
 import net.syamn.utils.Util;
@@ -79,13 +80,20 @@ public class BuyCommand extends BaseCommand {
     public static void sendBuyables(final Player p){
         Map<String, RuleBook> books = getBuyableBooks(p);
         if (books.isEmpty()){
-            Util.message(p, "&c現在購入できるルールブックはありません！");
+            Util.message(p, _("NoAvailableBooks"));
             return;
         }
         
-        Util.message(p, "&a ===== &b購入可能ルールブックリスト(" + books.size() + ") &a======");
+        final boolean econEnabled = RuleBooks.getInstance().getConfigs().isEnabledEcon();
+        Util.message(p, _("AvailableListHeader", I18n.COUNT, books.size()));
+        
+        String line;
         for (final RuleBook book : books.values()){
-            Util.message(p, " &6" + book.getName() + "&7 (Cost: " + EconomyUtil.getCurrencyString(book.getCost()) + ")");
+            line = "&6 " + book.getName();
+            if (econEnabled){
+                line += "&7 (" + _("Price") + ": " + EconomyUtil.getCurrencyString(book.getCost()) + ")";
+            }
+            Util.message(p, line);
         }
     }
     

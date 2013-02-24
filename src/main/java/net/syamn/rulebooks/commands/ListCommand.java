@@ -7,6 +7,7 @@ package net.syamn.rulebooks.commands;
 import java.util.Map;
 
 import net.syamn.rulebooks.Perms;
+import net.syamn.rulebooks.RuleBooks;
 import net.syamn.rulebooks.manager.RuleBook;
 import net.syamn.rulebooks.manager.RuleBookManager;
 import net.syamn.utils.Util;
@@ -33,9 +34,16 @@ public class ListCommand extends BaseCommand {
         Map<String, RuleBook> books = RuleBookManager.getBooks();
         if (books.size() <= 0) { throw new CommandException(_("NoBooks")); }
 
-        Util.message(sender, "&a ========== &bRuleBooks(" + books.size() + ") &a==========");
+        Util.message(sender, _("AllListHeader"));
+        
+        final boolean econEnabled = plugin.getConfigs().isEnabledEcon();
+        String line;
         for (final RuleBook book : books.values()) {
-            Util.message(sender, " &6" + book.getName() + "&7 (Cost: " + EconomyUtil.getCurrencyString(book.getCost()) + " )");
+            line = "&6 " + book.getName();
+            if (econEnabled){
+                line += "&7 (" + _("Price") + ": " + EconomyUtil.getCurrencyString(book.getCost()) + ")";
+            }
+            Util.message(sender, line);
         }
     }
 }
