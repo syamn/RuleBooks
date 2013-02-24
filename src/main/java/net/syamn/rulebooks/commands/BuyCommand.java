@@ -60,7 +60,7 @@ public class BuyCommand extends BaseCommand {
 
         inv.addItem(book.getItem());
         if (paid) {
-            Util.message(sender, _("BoughtBook", I18n.BOOK_NAME, book.getName(), I18n.COST, cost));
+            Util.message(sender, _("BoughtBook", I18n.BOOK_NAME, book.getName(), I18n.COST, EconomyUtil.getCurrencyString(cost)));
         } else {
             Util.message(sender, _("GotBook", I18n.BOOK_NAME, book.getName()));
         }

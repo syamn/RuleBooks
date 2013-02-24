@@ -10,6 +10,7 @@ import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.manager.RuleBook;
 import net.syamn.rulebooks.manager.RuleBookManager;
 import net.syamn.utils.Util;
+import net.syamn.utils.economy.EconomyUtil;
 import net.syamn.utils.exception.CommandException;
 import static net.syamn.rulebooks.I18n._;
 
@@ -34,7 +35,7 @@ public class ListCommand extends BaseCommand {
 
         Util.message(sender, "&a ========== &bRuleBooks(" + books.size() + ") &a==========");
         for (final RuleBook book : books.values()) {
-            Util.message(sender, " &6" + book.getName() + "&7 (Cost: " + book.getCost() + " )");
+            Util.message(sender, " &6" + book.getName() + "&7 (Cost: " + EconomyUtil.getCurrencyString(book.getCost()) + " )");
         }
     }
 }

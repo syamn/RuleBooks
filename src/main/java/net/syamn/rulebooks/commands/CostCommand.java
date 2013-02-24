@@ -9,6 +9,7 @@ import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.manager.RuleBookManager;
 import net.syamn.utils.StrUtil;
 import net.syamn.utils.Util;
+import net.syamn.utils.economy.EconomyUtil;
 import net.syamn.utils.exception.CommandException;
 import static net.syamn.rulebooks.I18n._;
 
@@ -40,6 +41,6 @@ public class CostCommand extends BaseCommand {
         if (cost < 0) { throw new CommandException(_("InvalidPrice", I18n.COST, cost)); }
 
         RuleBookManager.getBook(name).setCost(cost);
-        Util.message(sender, _("SetPrice", I18n.BOOK_NAME, name, I18n.COST, cost));
+        Util.message(sender, _("SetPrice", I18n.BOOK_NAME, name, I18n.COST, EconomyUtil.getCurrencyString(cost)));
     }
 }
