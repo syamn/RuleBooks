@@ -15,6 +15,7 @@ import net.syamn.rulebooks.I18n;
 import net.syamn.rulebooks.Perms;
 import net.syamn.rulebooks.RuleBooks;
 import net.syamn.rulebooks.events.PreTransactionEvent;
+import net.syamn.rulebooks.events.TransactionEvent;
 import net.syamn.rulebooks.manager.RuleBook;
 import net.syamn.rulebooks.manager.RuleBookManager;
 import net.syamn.utils.Util;
@@ -92,6 +93,9 @@ public class BuyCommand extends BaseCommand {
         } else {
             Util.message(sender, _("GotBook", I18n.BOOK_NAME, book.getName()));
         }
+        
+        // call event
+        plugin.getServer().getPluginManager().callEvent(new TransactionEvent(preEvent, paid));
     }
 
     public static void sendBuyables(final Player p) {
