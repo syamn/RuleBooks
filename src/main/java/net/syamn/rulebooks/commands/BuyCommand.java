@@ -83,7 +83,7 @@ public class BuyCommand extends BaseCommand {
         if (cost > 0 && plugin.getConfigs().isEnabledEcon()) {
             paid = EconomyUtil.takeMoney(player, cost);
             if (!paid) {
-                throw new CommandException(_("NotEnoughMoney", I18n.COST, cost));
+                throw new CommandException(_("NotEnoughMoney", I18n.COST, EconomyUtil.getCurrencyString(cost)));
             }
         }
 
