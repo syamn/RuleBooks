@@ -5,7 +5,7 @@
 #====================#
 #   General Config   #
 #====================#
-# Set your language file here
+# Set your language file name
 Language: default
 
 # Hook to Vault for economy integration

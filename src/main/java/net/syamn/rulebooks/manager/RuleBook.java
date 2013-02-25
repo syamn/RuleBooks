@@ -17,6 +17,9 @@ import org.bukkit.inventory.ItemStack;
  * @author syam(syamn)
  */
 public class RuleBook {
+    /* Current RuleBook file format version */
+    private final int latestVersion = 1;
+    
     private String bookName;
     private ItemStack item;
     private double cost = 0D;
@@ -78,6 +81,7 @@ public class RuleBook {
         conf.set("Name", bookName);
         conf.set("Cost", cost);
         conf.set("Item", item);
+        conf.set("FileVersion", latestVersion);
 
         try {
             conf.save(file);
