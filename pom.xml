@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.syam.rulebooks</groupId>
   <artifactId>RuleBooks</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>RuleBooks</name>
   <description>CraftBukkit RuleBooks Plugin</description>
 
