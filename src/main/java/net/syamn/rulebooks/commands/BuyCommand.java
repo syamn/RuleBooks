@@ -68,16 +68,16 @@ public class BuyCommand extends BaseCommand {
         // call event
         double cost = book.getCost();
         ItemStack item = book.getItem();
-        
+
         PreTransactionEvent preEvent = new PreTransactionEvent(player, book.getName(), item, cost);
         plugin.getServer().getPluginManager().callEvent(preEvent);
-        if (preEvent.isCancelled()){
+        if (preEvent.isCancelled()) {
             return;
         }
-        
+
         cost = preEvent.getPrice();
         item = preEvent.getItem().clone();
-        
+
         // pay cost
         boolean paid = false;
         if (cost > 0 && plugin.getConfigs().isEnabledEcon()) {
@@ -93,7 +93,7 @@ public class BuyCommand extends BaseCommand {
         } else {
             Util.message(sender, _("GotBook", I18n.BOOK_NAME, book.getName()));
         }
-        
+
         // call event
         plugin.getServer().getPluginManager().callEvent(new TransactionEvent(preEvent, paid));
     }

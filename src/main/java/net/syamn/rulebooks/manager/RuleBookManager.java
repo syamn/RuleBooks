@@ -83,7 +83,8 @@ public class RuleBookManager {
             return false;
         }
 
-        for (final BaseCommand cmd : RuleBooks.getInstance().commands) {
+        RuleBooks.getInstance();
+        for (final BaseCommand cmd : RuleBooks.commands) {
             if (bookName.equalsIgnoreCase(cmd.name)) {
                 return false;
             }

@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 public class RuleBook {
     /* Current RuleBook file format version */
     private final int latestVersion = 1;
-    
+
     private String bookName;
     private ItemStack item;
     private double cost = 0D;

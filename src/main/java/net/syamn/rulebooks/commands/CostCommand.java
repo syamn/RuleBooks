@@ -41,16 +41,16 @@ public class CostCommand extends BaseCommand {
 
         // check price
         double cost = 0;
-        if (!"free".equalsIgnoreCase(args.get(1))){
+        if (!"free".equalsIgnoreCase(args.get(1))) {
             cost = 0;
-        }else{
-            if (StrUtil.isDouble(args.get(1))){
+        } else {
+            if (StrUtil.isDouble(args.get(1))) {
                 cost = Double.parseDouble(args.get(1));
-            }else{
+            } else {
                 throw new CommandException(_("InvalidPrice", I18n.COST, args.get(1)));
             }
         }
-        
+
         if (cost < 0) {
             throw new CommandException(_("InvalidPrice", I18n.COST, cost));
         }
