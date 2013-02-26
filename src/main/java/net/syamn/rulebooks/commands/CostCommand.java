@@ -41,7 +41,7 @@ public class CostCommand extends BaseCommand {
 
         // check price
         double cost = 0;
-        if (!"free".equalsIgnoreCase(args.get(1))) {
+        if ("free".equalsIgnoreCase(args.get(1))) {
             cost = 0;
         } else {
             if (StrUtil.isDouble(args.get(1))) {
