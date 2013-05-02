@@ -225,7 +225,7 @@
       <dependency>
           <groupId>org.bukkit</groupId>
           <artifactId>bukkit</artifactId>
-          <version>1.5-R0.1-SNAPSHOT</version>
+          <version>1.5.2-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
       <!-- CraftBukkit Dependency -->
@@ -233,7 +233,7 @@
       <dependency>
           <groupId>org.bukkit</groupId>
           <artifactId>craftbukkit</artifactId>
-          <version>1.4.7-R1.1-SNAPSHOT</version>
+          <version>1.5.2-R1.1-SNAPSHOT</version>
           <scope>compile</scope>
       </dependency>
        -->
@@ -241,14 +241,14 @@
       <dependency>
           <groupId>net.milkbowl.vault</groupId>
           <artifactId>Vault</artifactId>
-          <version>1.2.23-SNAPSHOT</version>
+          <version>1.2.26-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
       <!-- SakuraUtils Dependency -->
       <dependency>
           <groupId>net.syamn</groupId>
           <artifactId>SakuraLib</artifactId>
-          <version>1.4.7-0.1</version>
+          <version>1.5.2-0.1</version>
       </dependency>
   </dependencies>
 
